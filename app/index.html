@@ -1,25 +1,152 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leonida Ledger — GTA 6 Trophy Guide & Platinum Roadmap</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
-</header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-<script type="module" src="app.js"></script>
+  <div class="container">
+    <header>
+      <div class="brand-row">
+        <div class="logo-group">
+          <h1 class="app-title">LEONIDA LEDGER</h1>
+          <span class="badge-tag">PS5 EDITION</span>
+        </div>
+        <div class="header-actions">
+          <button id="btn-select-all" class="btn" type="button" title="Mark all trophies as earned">Select All</button>
+          <button id="btn-reset-all" class="btn" type="button" title="Reset all progress to 0">Reset</button>
+          <button id="btn-export-json" class="btn" type="button">Export JSON</button>
+          <label class="btn btn-file-label">Import JSON
+            <input id="file-import-json" type="file" accept="application/json">
+          </label>
+          <button id="btn-export-md" class="btn btn-primary" type="button">Backup MD</button>
+        </div>
+      </div>
+      <p class="subtitle">Comprehensive offline companion, interactive tracker, and spoiler-safe platinum walkthrough for Grand Theft Auto VI on PlayStation 5.</p>
+    </header>
+
+    <!-- Dashboard Progress Grid -->
+    <section class="dashboard-grid" aria-label="Progress Statistics">
+      <div class="stat-card main-progress">
+        <div class="stat-label">
+          <span>Overall Completion</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="stat-value" id="progress-text">0 of 55 Earned</div>
+        <div class="progress-bar-bg">
+          <div id="progress-fill" class="progress-bar-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="stat-card platinum">
+        <div class="stat-label">Platinum</div>
+        <div class="stat-value" id="count-platinum">0 / 1</div>
+        <span class="stat-total">Leonida Legend</span>
+      </div>
+
+      <div class="stat-card gold">
+        <div class="stat-label">Gold</div>
+        <div class="stat-value" id="count-gold">0 / 2</div>
+        <span class="stat-total">Major Milestones</span>
+      </div>
+
+      <div class="stat-card silver">
+        <div class="stat-label">Silver</div>
+        <div class="stat-value" id="count-silver">0 / 6</div>
+        <span class="stat-total">Elite Challenges</span>
+      </div>
+
+      <div class="stat-card bronze">
+        <div class="stat-label">Bronze</div>
+        <div class="stat-value" id="count-bronze">0 / 46</div>
+        <span class="stat-total">Campaign & World</span>
+      </div>
+    </section>
+
+    <!-- View Navigation Tabs -->
+    <nav class="view-tabs" aria-label="Guide Views">
+      <button id="tab-checklist" class="tab-btn active" type="button">
+        Trophy Checklist <span id="checklist-count" class="tab-count">0/55</span>
+      </button>
+      <button id="tab-roadmap" class="tab-btn" type="button">
+        Platinum Roadmap
+      </button>
+      <button id="tab-missables" class="tab-btn" type="button">
+        Missables Radar
+      </button>
+    </nav>
+
+    <!-- Filter & Search Toolbar -->
+    <section id="toolbar-section" class="toolbar" aria-label="Checklist Controls">
+      <div class="search-row">
+        <div class="search-wrap">
+          <input id="search-input" class="search-input" type="search" placeholder="Instant search by trophy name, description, objective, or guide text..." aria-label="Search trophies">
+        </div>
+      </div>
+
+      <div class="filter-selects">
+        <label class="filter-label">Grade:
+          <select id="grade-filter" class="filter-select">
+            <option value="all">All Grades (55)</option>
+            <option value="platinum">Platinum (1)</option>
+            <option value="gold">Gold (2)</option>
+            <option value="silver">Silver (6)</option>
+            <option value="bronze">Bronze (46)</option>
+          </select>
+        </label>
+
+        <label class="filter-label">Category:
+          <select id="kind-filter" class="filter-select">
+            <option value="all">All Categories</option>
+            <option value="story">Story Campaign</option>
+            <option value="missable">Missable Only</option>
+            <option value="collectibles">Collectibles</option>
+            <option value="activities">Activities & Mini-games</option>
+            <option value="combat">Combat & Wanted</option>
+            <option value="economy">Economy & Properties</option>
+          </select>
+        </label>
+
+        <label class="filter-label">Status:
+          <select id="status-filter" class="filter-select">
+            <option value="all">All Trophies</option>
+            <option value="earned">Earned Only</option>
+            <option value="remaining">Remaining Only</option>
+          </select>
+        </label>
+
+        <label class="filter-label">Roadmap Phase:
+          <select id="phase-filter" class="filter-select">
+            <option value="all">All Phases (1–5)</option>
+            <option value="1">Phase 1: Story Campaign</option>
+            <option value="2">Phase 2: Strangers & Freaks</option>
+            <option value="3">Phase 3: Heists & Open World</option>
+            <option value="4">Phase 4: Collectibles & Stunts</option>
+            <option value="5">Phase 5: Clean-up & 100%</option>
+          </select>
+        </label>
+
+        <button id="btn-missables-toggle" class="filter-toggle-btn" type="button" title="Show only missable trophies">
+          ⚠️ Missables Only
+        </button>
+
+        <button id="btn-spoiler-toggle" class="filter-toggle-btn active-spoiler" type="button" title="Toggle spoiler protection for unearned story trophies">
+          🛡️ Spoiler Shield: ON
+        </button>
+      </div>
+    </section>
+
+    <!-- Main Content Containers -->
+    <main>
+      <div id="trophy-list" class="trophy-list"></div>
+      <div id="roadmap-view" class="roadmap-container" style="display: none;"></div>
+      <div id="missables-view" class="missables-grid" style="display: none;"></div>
+    </main>
+  </div>
+
+  <script type="module" src="src/app.js"></script>
 </body>
 </html>

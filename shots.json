@@ -1,5 +1,1 @@
-[
-  { "file": "1-checklist.jpg", "path": "/", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "2-silver.jpg", "path": "/", "grade": "silver", "viewport": { "width": 1280, "height": 800 } },
-  { "file": "3-bronze.jpg", "path": "/", "grade": "bronze", "scroll": 1400, "viewport": { "width": 1280, "height": 800 } }
-]
+[{"file":"1-dashboard.jpg","path":"/","search":"On the Spot","viewport":{"width":1280,"height":720}},{"file":"2-roadmap.jpg","path":"/","view":"roadmap","viewport":{"width":1280,"height":720}},{"file":"3-missables-radar.jpg","path":"/","view":"missables","viewport":{"width":1280,"height":720}},{"file":"4-filters-search.jpg","path":"/","grade":"silver","viewport":{"width":1280,"height":720}}]
