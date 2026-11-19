@@ -14,6 +14,7 @@
 - Click-to-check tracking persisted in `localStorage`
 - Expandable step-by-step unlock strategies, missable warnings, source citations, and a phased platinum roadmap
 - JSON and Markdown backup export and import
+- Designed to stay fully usable at a 1280×720 desktop viewport with no clipped controls or typography
 
 ## Run locally
 
