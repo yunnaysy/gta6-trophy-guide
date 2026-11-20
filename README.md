@@ -4,6 +4,8 @@
 [![rank](https://make.fun/badge/gta6-trophy-guide-01/yunnaysy/gta6-trophy-guide/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 [![reward](https://make.fun/badge/gta6-trophy-guide-01/yunnaysy/gta6-trophy-guide/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01)
 
+**Live demo:** [https://yunnaysy.github.io/gta6-trophy-guide/](https://yunnaysy.github.io/gta6-trophy-guide/)
+
 **Leonida Ledger** is an offline, original-design companion for the Grand Theft Auto VI PlayStation 5 trophy list. It tracks all 55 official trophies, lays out a platinum roadmap, and flags every missable trophy — with no Rockstar logos, official artwork, box art, or in-game screenshots.
 
 ## Features
